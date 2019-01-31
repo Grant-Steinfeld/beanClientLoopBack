@@ -1,6 +1,6 @@
-import { Request, RestBindings, get, ResponseObject } from '@loopback/rest';
+import { Request, RestBindings, get, post, requestBody, ResponseObject } from '@loopback/rest';
 import { inject } from '@loopback/context';
-
+import { Cup } from '../models';
 /**
  * OpenAPI response for pourcup()
  */
@@ -47,6 +47,20 @@ export class PourCupController {
       url: this.req.url,
       headers: Object.assign({}, this.req.headers),
     };
+  }
+
+  // Map to `POST`
+  @post('/pourCup', {
+    responses: {
+      '200': {
+        description: 'Cup model instance',
+        content: { 'application/json': { schema: { 'x-ts-type': Cup } } },
+      },
+    },
+  })
+  async create(@requestBody() cup: Cup): Promise<Cup> {
+    return cup;
+    //return await this.CupRepository.create(Cup);
   }
 }
 
