@@ -1,6 +1,6 @@
 import { Request, RestBindings, get, post, requestBody, ResponseObject } from '@loopback/rest';
 import { inject } from '@loopback/context';
-import { Cup } from '../models';
+import { Shipper } from '../models';
 
 var BlockchainClient = require('../blockchainClient.js');
 //import { BlockchainClient } from '../blockchainClient';
@@ -9,10 +9,10 @@ var blockchainClient = new BlockchainClient();
 
 
 /**
- * OpenAPI response for pourcup()
+ * OpenAPI response for Shipper()
  */
-const POURCUP_RESPONSE: ResponseObject = {
-  description: 'Pour Cup Response',
+const Shipper_RESPONSE: ResponseObject = {
+  description: 'Pour Shipper Response',
   content: {
     'application/json': {
       schema: {
@@ -45,19 +45,19 @@ interface iInput {
 /**
  * A simple controller to bounce back http requests
  */
-export class PourCupController {
+export class ShipperController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
 
-  // Map to `GET /pourCup`
-  @get('/pourCup', {
+  // Map to `GET /Shipper`
+  @get('/Shipper', {
     responses: {
-      '200': POURCUP_RESPONSE,
+      '200': Shipper_RESPONSE,
     },
   })
-  pourCup(): object {
+  Shipper(): object {
     // Reply with a greeting, the current time, the url, and request headers
     return {
-      greeting: 'poured cup',
+      greeting: 'found Shipper',
       date: new Date(),
       url: this.req.url,
       headers: Object.assign({}, this.req.headers),
@@ -65,15 +65,15 @@ export class PourCupController {
   }
 
   // Map to `POST`
-  @post('/pourCup', {
+  @post('/Shipper', {
     responses: {
       '200': {
-        description: 'Cup model instance',
-        content: { 'application/json': { schema: { 'x-ts-type': Cup } } },
+        description: 'Shipper model instance',
+        content: { 'application/json': { schema: { 'x-ts-type': Shipper } } },
       },
     },
   })
-  async create(@requestBody() cup: Cup): Promise<Cup> {
+  async create(@requestBody() shipper: Shipper): Promise<Shipper> {
 
 
     //example of how to submit args to transaction - this can be changed
@@ -81,18 +81,18 @@ export class PourCupController {
 
     let dataForAddMember = {
       function: 'addMember',
-      id: 'horea.porutiu@ibm.com',
-      organization: 'IBM',
-      address: 'NYC',
-      memberType: 'Software Developer'
+      id: shipper.shipperId,
+      organization: shipper.organization,
+      address: shipper.address,
+      memberType: 'shipper'
     };
 
-    blockchainClient.submitTransaction(dataForAddMember);
+    var result = blockchainClient.submitTransaction(dataForAddMember);
+    console.info(result);
 
 
-
-    return cup;
-    //return await this.CupRepository.create(Cup);
+    return shipper;
+    //return await this.ShipperRepository.create(Shipper);
   }
 }
 
