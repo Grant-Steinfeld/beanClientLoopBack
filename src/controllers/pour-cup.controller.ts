@@ -34,14 +34,7 @@ const POURCUP_RESPONSE: ResponseObject = {
   },
 };
 
-interface iInput {
-  function: string;
-  id: string;
-  organization: string;
-  address: string;
-  memberType: string;
 
-}
 /**
  * A simple controller to bounce back http requests
  */
@@ -77,17 +70,14 @@ export class PourCupController {
 
 
     //example of how to submit args to transaction - this can be changed
-    //  async addMember(ctx, id, organization, address, memberType) {
+    //  async pourCup(ctx, id, organization, address, memberType) {
 
-    let dataForAddMember = {
-      function: 'addMember',
-      id: 'horea.porutiu@ibm.com',
-      organization: 'IBM',
-      address: 'NYC',
-      memberType: 'Software Developer'
+    let dataForpourCup = {
+      function: 'pourCup',
+      id: cup.cupId
     };
 
-    blockchainClient.submitTransaction(dataForAddMember);
+    blockchainClient.submitTransaction(dataForpourCup);
 
 
 

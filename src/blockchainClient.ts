@@ -45,7 +45,7 @@ class BlockchainClient {
       // Get the contract we have installed on the peer
       const contract = await network.getContract('beanVSCode');
 
-      console.log('\nSubmit hello world transaction.');
+      console.log('\nSubmit a transaction :: ' + args.function);
 
       // let response = await contract.submitTransaction('addMember', 'horea@ibm', 'IBM2', '555 Market street', 'retailer');
       // let response = await contract.submitTransaction('addMember','horea.porutiu@ibm.com','IBM','NYC','Software Developer');
