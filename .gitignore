@@ -1,3 +1,5 @@
+local_fabric
+
 # Logs
 logs
 *.log
