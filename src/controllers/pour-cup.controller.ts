@@ -1,6 +1,13 @@
 import { Request, RestBindings, get, post, requestBody, ResponseObject } from '@loopback/rest';
 import { inject } from '@loopback/context';
 import { Cup } from '../models';
+
+var BlockchainClient = require('../blockchainClient.js');
+//import { BlockchainClient } from '../blockchainClient';
+
+var blockchainClient = new BlockchainClient();
+
+
 /**
  * OpenAPI response for pourcup()
  */
@@ -27,6 +34,14 @@ const POURCUP_RESPONSE: ResponseObject = {
   },
 };
 
+interface iInput {
+  function: string;
+  id: string;
+  organization: string;
+  address: string;
+  memberType: string;
+
+}
 /**
  * A simple controller to bounce back http requests
  */
@@ -59,6 +74,23 @@ export class PourCupController {
     },
   })
   async create(@requestBody() cup: Cup): Promise<Cup> {
+
+
+    //example of how to submit args to transaction - this can be changed
+    //  async addMember(ctx, id, organization, address, memberType) {
+    //iInput
+    let dataForAddMember = {
+      function: 'addMember',
+      id: 'horea.porutiu@ibm.com',
+      organization: 'IBM',
+      address: 'NYC',
+      memberType: 'Software Developer'
+    };
+
+    blockchainClient.submitTransaction(dataForAddMember);
+
+
+
     return cup;
     //return await this.CupRepository.create(Cup);
   }
