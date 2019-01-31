@@ -65,7 +65,63 @@ class BlockchainClient {
 
   }
 
-  async queryByKey() {
+  async lookupTransaction(args: any) {
+
+    const gateway = new Gateway();
+
+    try {
+
+
+      let argsList = (Object.values(args).toString());
+      console.log('args: ')
+      console.log(args)
+      console.log(argsList)
+
+      const identityLabel = 'Admin@org1.example.com';
+      let connectionProfile = yaml.safeLoad(fs.readFileSync('./network.yaml', 'utf8'));
+
+      let connectionOptions = {
+        identity: identityLabel,
+        wallet: wallet,
+        discovery: {
+          asLocalhost: true
+        }
+      };
+
+      // Connect to gateway using network.yaml file and our certificates in _idwallet directory
+      await gateway.connect(connectionProfile, connectionOptions);
+
+      console.log('Connected to Fabric gateway.');
+
+      // Connect to our local fabric
+      const network = await gateway.getNetwork('mychannel');
+
+      console.log('Connected to mychannel. ');
+
+      // Get the contract we have installed on the peer
+      const contract = await network.getContract('beanVSCode');
+
+      console.log('\nSubmit a transaction :: ' + args.function);
+
+      // let response = await contract.submitTransaction('query', 'horea@ibm');
+
+      let response = await contract.submitTransaction(args.function, args.id);
+
+      // console.log(JSON.parse(response.toString()));
+      return response;
+
+    } catch (error) {
+      console.log(`Error processing transaction. ${error}`);
+      console.log(error.stack);
+    } finally {
+      // Disconnect from the gateway
+      console.log('Disconnect from Fabric gateway.');
+      gateway.disconnect();
+    }
+
+  }
+
+  async queryByKey(keyPassed: any) {
 
     // A gateway defines the peers used to access Fabric networks
     const gateway = new Gateway();
@@ -95,7 +151,7 @@ class BlockchainClient {
 
       const channel = network.getChannel();
       //set up our request - specify which chaincode, which function, and which arguments
-      let request = { chaincodeId: 'beanVSCode', fcn: 'query', args: ['horea@ibm'] };
+      let request = { chaincodeId: 'beanVSCode', fcn: 'query', args: [keyPassed] };
       //query the ledger by the key in the args above
       let resultBuffer = await channel.queryByChaincode(request);
 

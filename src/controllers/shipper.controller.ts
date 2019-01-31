@@ -1,4 +1,4 @@
-import { Request, RestBindings, get, post, requestBody, ResponseObject } from '@loopback/rest';
+import { Request, RestBindings, get, post, requestBody, ResponseObject, param } from '@loopback/rest';
 import { inject } from '@loopback/context';
 import { Shipper } from '../models';
 
@@ -34,19 +34,36 @@ const Shipper_RESPONSE: ResponseObject = {
   },
 };
 
-interface iInput {
-  function: string;
-  id: string;
-  organization: string;
-  address: string;
-  memberType: string;
 
-}
 /**
  * A simple controller to bounce back http requests
  */
 export class ShipperController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
+
+
+  @get('/Shipper/{shipperId}', {
+    responses: {
+      '200': {
+        description: 'Shipper model instance',
+        content: { 'application/json': { schema: { 'x-ts-type': Shipper } } },
+      },
+    },
+  })
+  async findById(@param.path.string('shipperId') shipit: string): Promise<Shipper> {
+    let dataForQuery = {
+      function: 'query',
+      id: shipit
+    };
+
+    let rez = await blockchainClient.lookupTransaction(dataForQuery);
+    console.log("rez :: <Buffer> tbd how to work this .... ");
+    console.log(rez);
+    let x = new Shipper({ id: 33, organization: 'ace', address: '43 Palm Lane', shipperId: 'shippersId' });
+    return x;
+    //return await this.ShipperRepository.findById(id);
+
+  }
 
   // Map to `GET /Shipper`
   @get('/Shipper', {
