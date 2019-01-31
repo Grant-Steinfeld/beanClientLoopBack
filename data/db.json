@@ -1,6 +1,7 @@
 {
   "ids": {
-    "Grower": 6
+    "Grower": 6,
+    "Regulator": 6
   },
   "models": {
     "Grower": {
@@ -9,6 +10,13 @@
       "3": "{\"organization\":\"terrorize senate\",\"address\":\"Tell them they're getting a budget cut.\",\"id\":3}",
       "4": "{\"organization\":\"crush rebel scum\",\"address\":\"Every.Last.One.\",\"id\":4}",
       "5": "{\"id\":5,\"organization\":\"acme\",\"address\":\"4 apple lane\"}"
+    },
+    "Regulator": {
+      "1": "{\"organization\":\"aTake over the galaxy\",\"address\":\"MWAHAHAHAHAHAHAHAHAHAHAHAHAMWAHAHAHAHAHAHAHAHAHAHAHAHA\",\"id\":1}",
+      "2": "{\"organization\":\"adestroy alderaan\",\"address\":\"Make sure there are no survivors left!\",\"id\":2}",
+      "3": "{\"organization\":\"aterrorize senate\",\"address\":\"Tell them they're getting a budget cut.\",\"id\":3}",
+      "4": "{\"organization\":\"acrush rebel scum\",\"address\":\"Every.Last.One.\",\"id\":4}",
+      "5": "{\"id\":5,\"organization\":\"aacme\",\"address\":\"4 apple lane\"}"
     }
   }
 }
