@@ -51,14 +51,20 @@ export class ShipperController {
     },
   })
   async findById(@param.path.string('shipperId') shipit: string): Promise<Shipper> {
+
+
+    let networkObj = await blockchainClient.connectToNetwork();
     let dataForQuery = {
       function: 'query',
-      id: shipit
+      id: shipit,
+      contract: networkObj.contract,
+      network: networkObj.network
     };
-
-    let rez = await blockchainClient.lookupTransaction(dataForQuery);
+    let rez = await blockchainClient.queryByKey(dataForQuery);
     console.log("rez :: <Buffer> tbd how to work this .... ");
+
     console.log(rez);
+    console.log(JSON.parse(rez.toString()));
     let x = new Shipper({ id: 33, organization: 'ace', address: '43 Palm Lane', shipperId: 'shippersId' });
     return x;
     //return await this.ShipperRepository.findById(id);
@@ -91,19 +97,20 @@ export class ShipperController {
     },
   })
   async create(@requestBody() shipper: Shipper): Promise<Shipper> {
-
-
     //example of how to submit args to transaction - this can be changed
     //  async addMember(ctx, id, organization, address, memberType) {
 
+    console.log('shipper: ')
+    console.log(shipper)
+    let networkObj = await blockchainClient.connectToNetwork();
     let dataForAddMember = {
       function: 'addMember',
       id: shipper.shipperId,
       organization: shipper.organization,
       address: shipper.address,
-      memberType: 'shipper'
+      memberType: 'shipper',
+      contract: networkObj.contract
     };
-
     var result = blockchainClient.submitTransaction(dataForAddMember);
     console.info(result);
 
