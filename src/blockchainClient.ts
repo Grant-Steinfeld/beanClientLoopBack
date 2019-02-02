@@ -5,10 +5,10 @@ const fs = require('fs');
 
 // A wallet stores a collection of identities for use
 const wallet = new FileSystemWallet('./local_fabric/wallet');
-export module App {
+
+export module BlockChainModule {
+
   export class BlockchainClient {
-
-
     async connectToNetwork() {
 
       const gateway = new Gateway();

@@ -2,9 +2,9 @@ import { Request, RestBindings, get, post, requestBody, ResponseObject, param } 
 import { inject } from '@loopback/context';
 import { Shipper } from '../models/shipper.model';
 import { Address } from '../models/address.model';
-import { App } from '../blockchainClient';
+import { BlockChainModule } from '../blockchainClient';
 
-var blockchainClient = new App.BlockchainClient();
+let blockchainClient = new BlockChainModule.BlockchainClient();
 
 
 export class ShipperController {
