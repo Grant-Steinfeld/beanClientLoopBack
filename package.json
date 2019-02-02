@@ -29,6 +29,7 @@
     "migrate": "node ./dist/src/migrate",
     "prestart": "npm run build",
     "start": "node .",
+    "debug": "node --inspect .",
     "prepublishOnly": "npm run test"
   },
   "repository": {

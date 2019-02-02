@@ -1,11 +1,12 @@
 import { Request, RestBindings, get, post, requestBody, ResponseObject, param } from '@loopback/rest';
 import { inject } from '@loopback/context';
-import { Shipper } from '../models';
+import { Shipper } from '../models/shipper.model';
+import { Address } from '../models/address.model';
 
-var BlockchainClient = require('../blockchainClient.js');
-//import { BlockchainClient } from '../blockchainClient';
+//var BlockchainClient = require('../blockchainClient.js');
+import { BlockchainClient } from '../blockchainClient';
 
-var blockchainClient = new BlockchainClient();
+
 
 
 /**
@@ -60,12 +61,16 @@ export class ShipperController {
       contract: networkObj.contract,
       network: networkObj.network
     };
+    var blockchainClient = new BlockchainClient();
     let rez = await blockchainClient.queryByKey(dataForQuery);
     console.log("rez :: <Buffer> tbd how to work this .... ");
 
     console.log(rez);
     console.log(JSON.parse(rez.toString()));
-    let x = new Shipper({ id: 33, organization: 'ace', address: '43 Palm Lane', shipperId: 'shippersId' });
+
+    let address = new Address({ city: 'New York', country: 'USA', street: '34 Arnold Ln' });
+
+    let x = new Shipper({ organization: 'ace', address: address, shipperId: 'shippersId' });
     return x;
     //return await this.ShipperRepository.findById(id);
 
@@ -102,20 +107,23 @@ export class ShipperController {
 
     console.log('shipper: ')
     console.log(shipper)
+    debugger;
+    let blockchainClient = new BlockchainClient();
     let networkObj = await blockchainClient.connectToNetwork();
-    let dataForAddMember = {
-      function: 'addMember',
-      id: shipper.shipperId,
-      organization: shipper.organization,
-      address: shipper.address,
-      memberType: 'shipper',
-      contract: networkObj.contract
-    };
-    var result = blockchainClient.submitTransaction(dataForAddMember);
+    // let dataForAddMember = {
+    //   function: 'addMember',
+    //   id: shipper.shipperId,
+    //   organization: shipper.organization,
+    //   address: shipper.address,
+    //   memberType: 'shipper',
+    //   contract: networkObj.contract
+    // };
+
+    var result = await blockchainClient.submitTransaction(shipper);
     console.info(result);
 
 
-    return shipper;
+    return await shipper;
     //return await this.ShipperRepository.create(Shipper);
   }
 }
