@@ -1,5 +1,8 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "strictNullChecks": false
+  },
   "extends": "@loopback/build/config/tsconfig.common.json",
   "include": [
     "src",
