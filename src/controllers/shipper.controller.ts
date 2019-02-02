@@ -40,6 +40,7 @@ export class ShipperController {
     let result = await blockchainClient.queryByKey(dataForQuery);
     console.log(`lookup by key ${id}`);
 
+
     //console.log(rez);
     var rez = JSON.parse(result.toString());
     console.log(rez)
@@ -64,7 +65,9 @@ export class ShipperController {
       },
     },
   })
+
   async shipperCreate(@requestBody() requestBody: Shipper): Promise<Shipper> {
+
     //example of how to submit args to transaction - this can be changed
     //  async addMember(ctx, id, organization, address, memberType) {
 
@@ -82,6 +85,7 @@ export class ShipperController {
     };
 
     var result = await blockchainClient.submitTransaction(dataForAddMember);
+
     console.info(result);
 
     //$to do: return blockchain hash or confirmation rather than the request

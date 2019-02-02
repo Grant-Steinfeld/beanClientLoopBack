@@ -6,6 +6,7 @@ const fs = require('fs');
 // A wallet stores a collection of identities for use
 const wallet = new FileSystemWallet('./local_fabric/wallet');
 
+
 export module BlockChainModule {
 
   export class BlockchainClient {
@@ -15,6 +16,7 @@ export module BlockChainModule {
 
       try {
         console.log('connecting to Fabric network...')
+
 
         const identityLabel = 'Admin@org1.example.com';
         let connectionProfile = yaml.safeLoad(fs.readFileSync('./network.yaml', 'utf8'));
@@ -39,6 +41,7 @@ export module BlockChainModule {
 
         // Get the contract we have installed on the peer
         const contract = await network.getContract('beanVSCode');
+
 
         let networkObj = {
           contract: contract,
