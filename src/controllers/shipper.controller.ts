@@ -2,43 +2,11 @@ import { Request, RestBindings, get, post, requestBody, ResponseObject, param } 
 import { inject } from '@loopback/context';
 import { Shipper } from '../models/shipper.model';
 import { Address } from '../models/address.model';
+import { App } from '../blockchainClient';
 
-//var BlockchainClient = require('../blockchainClient.js');
-import { BlockchainClient } from '../blockchainClient';
-
-
+var blockchainClient = new App.BlockchainClient();
 
 
-/**
- * OpenAPI response for Shipper()
- */
-const Shipper_RESPONSE: ResponseObject = {
-  description: 'Pour Shipper Response',
-  content: {
-    'application/json': {
-      schema: {
-        type: 'object',
-        properties: {
-          greeting: { type: 'string' },
-          date: { type: 'string' },
-          url: { type: 'string' },
-          headers: {
-            type: 'object',
-            properties: {
-              'Content-Type': { type: 'string' },
-            },
-            additionalProperties: true,
-          },
-        },
-      },
-    },
-  },
-};
-
-
-/**
- * A simple controller to bounce back http requests
- */
 export class ShipperController {
   constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
 
@@ -61,25 +29,23 @@ export class ShipperController {
       contract: networkObj.contract,
       network: networkObj.network
     };
-    var blockchainClient = new BlockchainClient();
-    let rez = await blockchainClient.queryByKey(dataForQuery);
-    console.log("rez :: <Buffer> tbd how to work this .... ");
 
-    console.log(rez);
-    console.log(JSON.parse(rez.toString()));
+    let result = await blockchainClient.queryByKey(dataForQuery);
+    console.log(`lookup by key $(shipit)`);
 
-    let address = new Address({ city: 'New York', country: 'USA', street: '34 Arnold Ln' });
-
-    let x = new Shipper({ organization: 'ace', address: address, shipperId: 'shippersId' });
-    return x;
-    //return await this.ShipperRepository.findById(id);
+    //console.log(rez);
+    var rez = JSON.parse(result.toString());
+    console.log(rez)
+    let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
+    let shipper = new Shipper({ shipperId: rez.id, organization: rez.organization, address: address });
+    return shipper;
 
   }
 
   // Map to `GET /Shipper`
   @get('/Shipper', {
     responses: {
-      '200': Shipper_RESPONSE,
+      '200': "shippers ... ",
     },
   })
   Shipper(): object {
@@ -107,24 +73,23 @@ export class ShipperController {
 
     console.log('shipper: ')
     console.log(shipper)
-    debugger;
-    let blockchainClient = new BlockchainClient();
-    let networkObj = await blockchainClient.connectToNetwork();
-    // let dataForAddMember = {
-    //   function: 'addMember',
-    //   id: shipper.shipperId,
-    //   organization: shipper.organization,
-    //   address: shipper.address,
-    //   memberType: 'shipper',
-    //   contract: networkObj.contract
-    // };
 
-    var result = await blockchainClient.submitTransaction(shipper);
+    let networkObj = await blockchainClient.connectToNetwork();
+    let dataForAddMember = {
+      function: 'addMember',
+      id: shipper.shipperId,
+      organization: shipper.organization,
+      address: shipper.address.country,
+      memberType: 'shipper',
+      contract: networkObj.contract
+    };
+
+    var result = await blockchainClient.submitTransaction(dataForAddMember);
     console.info(result);
+    //$to do: return blockchain hash or confirmation rather than the request
 
 
     return await shipper;
-    //return await this.ShipperRepository.create(Shipper);
   }
 }
 
