@@ -6,82 +6,82 @@ const fs = require('fs');
 // A wallet stores a collection of identities for use
 const wallet = new FileSystemWallet('./local_fabric/wallet');
 
-class BlockchainClient {
 
-  async connectToNetwork() {
+export module BlockChainModule {
 
-    const gateway = new Gateway();
+  export class BlockchainClient {
+    async connectToNetwork() {
 
-    try {
-      console.log('connecting to Fabric network...')
+      const gateway = new Gateway();
 
-      const identityLabel = 'Admin@org1.example.com';
-      let connectionProfile = yaml.safeLoad(fs.readFileSync('./network.yaml', 'utf8'));
+      try {
+        console.log('connecting to Fabric network...')
 
-      let connectionOptions = {
-        identity: identityLabel,
-        wallet: wallet,
-        discovery: {
-          asLocalhost: true
-        }
-      };
 
-      // Connect to gateway using network.yaml file and our certificates in _idwallet directory
-      await gateway.connect(connectionProfile, connectionOptions);
+        const identityLabel = 'Admin@org1.example.com';
+        let connectionProfile = yaml.safeLoad(fs.readFileSync('./network.yaml', 'utf8'));
 
-      console.log('Connected to Fabric gateway.');
+        let connectionOptions = {
+          identity: identityLabel,
+          wallet: wallet,
+          discovery: {
+            asLocalhost: true
+          }
+        };
 
-      // Connect to our local fabric
-      const network = await gateway.getNetwork('mychannel');
+        // Connect to gateway using network.yaml file and our certificates in _idwallet directory
+        await gateway.connect(connectionProfile, connectionOptions);
 
-      console.log('Connected to mychannel. ');
+        console.log('Connected to Fabric gateway.');
 
-      // Get the contract we have installed on the peer
-      const contract = await network.getContract('beanVSCode');
+        // Connect to our local fabric
+        const network = await gateway.getNetwork('mychannel');
 
-      let networkObj = {
-        contract: contract,
-        network: network
-      };
+        console.log('Connected to mychannel. ');
 
-      return networkObj;
+        // Get the contract we have installed on the peer
+        const contract = await network.getContract('beanVSCode');
 
-    } catch (error) {
-      console.log(`Error processing transaction. ${error}`);
-      console.log(error.stack);
-    } finally {
-      console.log('Done connecting to network.');
-      // gateway.disconnect();
+
+        let networkObj = {
+          contract: contract,
+          network: network
+        };
+
+        return networkObj;
+
+      } catch (error) {
+        console.log(`Error processing transaction. ${error}`);
+        console.log(error.stack);
+      } finally {
+        console.log('Done connecting to network.');
+        // gateway.disconnect();
+      }
+
     }
 
-  }
+    async submitTransaction(args: any) {
 
-  async submitTransaction(args: any) {
+      let argsList = (Object.values(args).toString());
+      console.log('args: ')
+      console.log(args)
+      console.log(argsList)
 
-    let argsList = (Object.values(args).toString());
-    console.log('args: ')
-    console.log(args)
-    console.log(argsList)
+      // let response = await contract.submitTransaction('addMember','horea.porutiu@ibm.com','IBM','NYC','Software Developer');
+      let response = await args.contract.submitTransaction(args.function, args.id, args.organization, args.address, args.memberType);
 
-    // let response = await contract.submitTransaction('addMember','horea.porutiu@ibm.com','IBM','NYC','Software Developer');
-    let response = await args.contract.submitTransaction(args.function, args.id, args.organization, args.address, args.memberType);
-
-    // console.log(JSON.parse(response.toString()));
-    return response;
+      return response;
+    }
 
 
-  }
+    async queryByKey(keyPassed: any) {
 
+      let response = await keyPassed.contract.submitTransaction('query', keyPassed.id);
+      console.log('query by key response: ')
+      console.log(JSON.parse(response.toString()))
+      response = JSON.parse(response.toString());
+      return response;
 
-  async queryByKey(keyPassed: any) {
-
-    let response = await keyPassed.contract.submitTransaction('query', keyPassed.id);
-    console.log('query by key response: ')
-    console.log(JSON.parse(response.toString()))
-    response = JSON.parse(response.toString());
-    return response;
-
+    }
   }
 }
-
-module.exports = BlockchainClient;

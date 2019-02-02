@@ -1,137 +1,92 @@
-import {
-  Count,
-  CountSchema,
-  Filter,
-  repository,
-  Where,
-} from '@loopback/repository';
-import {
-  post,
-  param,
-  get,
-  getFilterSchemaFor,
-  getWhereSchemaFor,
-  patch,
-  put,
-  del,
-  requestBody,
-} from '@loopback/rest';
-import {Grower} from '../models';
-import {GrowerRepository} from '../repositories';
+/* tslint:disable:no-any */
+import {operation, param, requestBody} from '@loopback/rest';
+import {Grower} from '../models/grower.model';
 
+/**
+ * The controller class is generated from OpenAPI spec with operations tagged
+ * by Grower
+ * A participant named Grower
+ */
 export class GrowerController {
-  constructor(
-    @repository(GrowerRepository)
-    public growerRepository : GrowerRepository,
-  ) {}
+  constructor() {}
 
-  @post('/Grower', {
-    responses: {
-      '200': {
-        description: 'Grower model instance',
-        content: {'application/json': {schema: {'x-ts-type': Grower}}},
-      },
-    },
-  })
-  async create(@requestBody() grower: Grower): Promise<Grower> {
-    return await this.growerRepository.create(grower);
+  /**
+   * 
+   * 
+
+   * @param requestBody Model instance data
+   * @returns Request was successful
+   */
+  @operation('post', '/Grower')
+  async growerCreate(@requestBody() requestBody: Grower): Promise<Grower> {
+    throw new Error('Not implemented');
   }
 
-  @get('/Grower/count', {
-    responses: {
-      '200': {
-        description: 'Grower model count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
-  async count(
-    @param.query.object('where', getWhereSchemaFor(Grower)) where?: Where,
-  ): Promise<Count> {
-    return await this.growerRepository.count(where);
+  /**
+   * 
+   * 
+
+   * @param filter Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})
+   * @returns Request was successful
+   */
+  @operation('get', '/Grower')
+  async growerFind(@param({name: 'filter', in: 'query'}) filter: string): Promise<Grower[]> {
+    throw new Error('Not implemented');
   }
 
-  @get('/Grower', {
-    responses: {
-      '200': {
-        description: 'Array of Grower model instances',
-        content: {
-          'application/json': {
-            schema: {type: 'array', items: {'x-ts-type': Grower}},
-          },
-        },
-      },
-    },
-  })
-  async find(
-    @param.query.object('filter', getFilterSchemaFor(Grower)) filter?: Filter,
-  ): Promise<Grower[]> {
-    return await this.growerRepository.find(filter);
+  /**
+   * 
+   * 
+
+   * @param id Model id
+   * @returns Request was successful
+   */
+  @operation('head', '/Grower/{id}')
+  async growerExists(@param({name: 'id', in: 'path'}) id: string): Promise<{
+  exists?: boolean;
+}> {
+    throw new Error('Not implemented');
   }
 
-  @patch('/Grower', {
-    responses: {
-      '200': {
-        description: 'Grower PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
-  async updateAll(
-    @requestBody() grower: Grower,
-    @param.query.object('where', getWhereSchemaFor(Grower)) where?: Where,
-  ): Promise<Count> {
-    return await this.growerRepository.updateAll(grower, where);
+  /**
+   * 
+   * 
+
+   * @param id Model id
+   * @param filter Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})
+   * @returns Request was successful
+   */
+  @operation('get', '/Grower/{id}')
+  async growerFindById(@param({name: 'id', in: 'path'}) id: string, @param({name: 'filter', in: 'query'}) filter: string): Promise<Grower> {
+    throw new Error('Not implemented');
   }
 
-  @get('/Grower/{id}', {
-    responses: {
-      '200': {
-        description: 'Grower model instance',
-        content: {'application/json': {schema: {'x-ts-type': Grower}}},
-      },
-    },
-  })
-  async findById(@param.path.number('id') id: number): Promise<Grower> {
-    return await this.growerRepository.findById(id);
+  /**
+   * 
+   * 
+
+   * @param requestBody Model instance data
+   * @param id Model id
+   * @returns Request was successful
+   */
+  @operation('put', '/Grower/{id}')
+  async growerReplaceById(@requestBody() requestBody: Grower, @param({name: 'id', in: 'path'}) id: string): Promise<Grower> {
+    throw new Error('Not implemented');
   }
 
-  @patch('/Grower/{id}', {
-    responses: {
-      '204': {
-        description: 'Grower PATCH success',
-      },
-    },
-  })
-  async updateById(
-    @param.path.number('id') id: number,
-    @requestBody() grower: Grower,
-  ): Promise<void> {
-    await this.growerRepository.updateById(id, grower);
+  /**
+   * 
+   * 
+
+   * @param id Model id
+   * @returns Request was successful
+   */
+  @operation('delete', '/Grower/{id}')
+  async growerDeleteById(@param({name: 'id', in: 'path'}) id: string): Promise<{
+  
+}> {
+    throw new Error('Not implemented');
   }
 
-  @put('/Grower/{id}', {
-    responses: {
-      '204': {
-        description: 'Grower PUT success',
-      },
-    },
-  })
-  async replaceById(
-    @param.path.number('id') id: number,
-    @requestBody() grower: Grower,
-  ): Promise<void> {
-    await this.growerRepository.replaceById(id, grower);
-  }
-
-  @del('/Grower/{id}', {
-    responses: {
-      '204': {
-        description: 'Grower DELETE success',
-      },
-    },
-  })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
-    await this.growerRepository.deleteById(id);
-  }
 }
+

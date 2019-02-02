@@ -1,13 +1,13 @@
 /* tslint:disable:no-any */
 import {operation, param, requestBody} from '@loopback/rest';
-import {Regulator} from '../models/regulator.model';
+import {CupCoffee} from '../models/cup-coffee.model';
 
 /**
  * The controller class is generated from OpenAPI spec with operations tagged
- * by Regulator
- * A participant named Regulator
+ * by cupCoffee
+ * An asset named cupCoffee
  */
-export class RegulatorController {
+export class CupCoffeeController {
   constructor() {}
 
   /**
@@ -17,8 +17,8 @@ export class RegulatorController {
    * @param requestBody Model instance data
    * @returns Request was successful
    */
-  @operation('post', '/Regulator')
-  async regulatorCreate(@requestBody() requestBody: Regulator): Promise<Regulator> {
+  @operation('post', '/cupCoffee')
+  async cupCoffeeCreate(@requestBody() requestBody: CupCoffee): Promise<CupCoffee> {
     throw new Error('Not implemented');
   }
 
@@ -29,8 +29,8 @@ export class RegulatorController {
    * @param filter Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})
    * @returns Request was successful
    */
-  @operation('get', '/Regulator')
-  async regulatorFind(@param({name: 'filter', in: 'query'}) filter: string): Promise<Regulator[]> {
+  @operation('get', '/cupCoffee')
+  async cupCoffeeFind(@param({name: 'filter', in: 'query'}) filter: string): Promise<CupCoffee[]> {
     throw new Error('Not implemented');
   }
 
@@ -41,8 +41,8 @@ export class RegulatorController {
    * @param id Model id
    * @returns Request was successful
    */
-  @operation('head', '/Regulator/{id}')
-  async regulatorExists(@param({name: 'id', in: 'path'}) id: string): Promise<{
+  @operation('head', '/cupCoffee/{id}')
+  async cupCoffeeExists(@param({name: 'id', in: 'path'}) id: string): Promise<{
   exists?: boolean;
 }> {
     throw new Error('Not implemented');
@@ -56,8 +56,8 @@ export class RegulatorController {
    * @param filter Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})
    * @returns Request was successful
    */
-  @operation('get', '/Regulator/{id}')
-  async regulatorFindById(@param({name: 'id', in: 'path'}) id: string, @param({name: 'filter', in: 'query'}) filter: string): Promise<Regulator> {
+  @operation('get', '/cupCoffee/{id}')
+  async cupCoffeeFindById(@param({name: 'id', in: 'path'}) id: string, @param({name: 'filter', in: 'query'}) filter: string): Promise<CupCoffee> {
     throw new Error('Not implemented');
   }
 
@@ -69,8 +69,8 @@ export class RegulatorController {
    * @param id Model id
    * @returns Request was successful
    */
-  @operation('put', '/Regulator/{id}')
-  async regulatorReplaceById(@requestBody() requestBody: Regulator, @param({name: 'id', in: 'path'}) id: string): Promise<Regulator> {
+  @operation('put', '/cupCoffee/{id}')
+  async cupCoffeeReplaceById(@requestBody() requestBody: CupCoffee, @param({name: 'id', in: 'path'}) id: string): Promise<CupCoffee> {
     throw new Error('Not implemented');
   }
 
@@ -81,8 +81,8 @@ export class RegulatorController {
    * @param id Model id
    * @returns Request was successful
    */
-  @operation('delete', '/Regulator/{id}')
-  async regulatorDeleteById(@param({name: 'id', in: 'path'}) id: string): Promise<{
+  @operation('delete', '/cupCoffee/{id}')
+  async cupCoffeeDeleteById(@param({name: 'id', in: 'path'}) id: string): Promise<{
   
 }> {
     throw new Error('Not implemented');

@@ -1,13 +1,13 @@
 /* tslint:disable:no-any */
 import {operation, param, requestBody} from '@loopback/rest';
-import {PourCup} from '../models/pour-cup.model';
+import {SubmitInboundWeightTally} from '../models/submit-inbound-weight-tally.model';
 
 /**
  * The controller class is generated from OpenAPI spec with operations tagged
- * by pourCup
- * A transaction named pourCup
+ * by submitInboundWeightTally
+ * A transaction named submitInboundWeightTally
  */
-export class PourCupController {
+export class SubmitInboundWeightTallyController {
   constructor() {}
 
   /**
@@ -17,8 +17,8 @@ export class PourCupController {
    * @param requestBody Model instance data
    * @returns Request was successful
    */
-  @operation('post', '/pourCup')
-  async pourCupCreate(@requestBody() requestBody: PourCup): Promise<PourCup> {
+  @operation('post', '/submitInboundWeightTally')
+  async submitInboundWeightTallyCreate(@requestBody() requestBody: SubmitInboundWeightTally): Promise<SubmitInboundWeightTally> {
     throw new Error('Not implemented');
   }
 
@@ -29,8 +29,8 @@ export class PourCupController {
    * @param filter Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})
    * @returns Request was successful
    */
-  @operation('get', '/pourCup')
-  async pourCupFind(@param({name: 'filter', in: 'query'}) filter: string): Promise<PourCup[]> {
+  @operation('get', '/submitInboundWeightTally')
+  async submitInboundWeightTallyFind(@param({name: 'filter', in: 'query'}) filter: string): Promise<SubmitInboundWeightTally[]> {
     throw new Error('Not implemented');
   }
 
@@ -42,8 +42,8 @@ export class PourCupController {
    * @param filter Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})
    * @returns Request was successful
    */
-  @operation('get', '/pourCup/{id}')
-  async pourCupFindById(@param({name: 'id', in: 'path'}) id: string, @param({name: 'filter', in: 'query'}) filter: string): Promise<PourCup> {
+  @operation('get', '/submitInboundWeightTally/{id}')
+  async submitInboundWeightTallyFindById(@param({name: 'id', in: 'path'}) id: string, @param({name: 'filter', in: 'query'}) filter: string): Promise<SubmitInboundWeightTally> {
     throw new Error('Not implemented');
   }
 
