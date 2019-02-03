@@ -40,14 +40,17 @@ export class ShipperController {
     console.log('before blockchainClient.queryByKey')
     let result = await blockchainClient.queryByKey(dataForQuery);
     console.log(`lookup by key ${id}`);
+    console.log('result after calling client.queryByKey: ')
+    console.log(result)
+    if (result.id) {
+      var rez = JSON.parse(result.toString());
+      console.log(rez)
+      let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
+      let shipper = new Shipper({ shipperId: rez.id, organization: rez.organization, address: address });
+      return shipper;
+    } 
+    return result;
 
-
-    //console.log(rez);
-    var rez = JSON.parse(result.toString());
-    console.log(rez)
-    let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
-    let shipper = new Shipper({ shipperId: rez.id, organization: rez.organization, address: address });
-    return shipper;
   }
 
 

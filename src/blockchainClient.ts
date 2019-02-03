@@ -75,6 +75,11 @@ export module BlockChainModule {
       let response = await keyPassed.contract.submitTransaction('query', keyPassed.id);
       console.log('query by key response: ')
       console.log(JSON.parse(response.toString()))
+      console.log(response.length)
+      if (response.length === 2) {
+        response = `${keyPassed.id} does not exist`;
+        return response;
+      }
       response = JSON.parse(response.toString());
       return response;
 
