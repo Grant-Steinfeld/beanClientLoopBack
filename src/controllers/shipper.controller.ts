@@ -37,6 +37,7 @@ export class ShipperController {
       network: networkObj.network
     };
 
+    console.log('before blockchainClient.queryByKey')
     let result = await blockchainClient.queryByKey(dataForQuery);
     console.log(`lookup by key ${id}`);
 
@@ -66,7 +67,7 @@ export class ShipperController {
     },
   })
 
-  async shipperCreate(@requestBody() requestBody: Shipper): Promise<Shipper> {
+  async shipperCreate(@requestBody() requestBody: Shipper): Promise<any> {
 
     //example of how to submit args to transaction - this can be changed
     //  async addMember(ctx, id, organization, address, memberType) {
@@ -75,6 +76,8 @@ export class ShipperController {
     console.log(requestBody)
 
     let networkObj = await blockchainClient.connectToNetwork();
+    console.log('newtork obj: ')
+    console.log(networkObj)
     let dataForAddMember = {
       function: 'addMember',
       id: requestBody.shipperId,
@@ -84,12 +87,13 @@ export class ShipperController {
       contract: networkObj.contract
     };
 
-    var result = await blockchainClient.submitTransaction(dataForAddMember);
+    var result = await blockchainClient.addMember(dataForAddMember);
 
-    console.info(result);
+    console.log('result from blockchainClient.submitTransaction in controller: ')
+    console.log(result.toString())
 
     //$to do: return blockchain hash or confirmation rather than the request
-    return await requestBody;
+    return result;
   }
 
 

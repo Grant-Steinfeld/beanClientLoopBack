@@ -60,17 +60,13 @@ export module BlockChainModule {
 
     }
 
-    async submitTransaction(args: any) {
-
-      let argsList = (Object.values(args).toString());
-      console.log('args: ')
-      console.log(args)
-      console.log(argsList)
-
-      // let response = await contract.submitTransaction('addMember','horea.porutiu@ibm.com','IBM','NYC','Software Developer');
-      let response = await args.contract.submitTransaction(args.function, args.id, args.organization, args.address, args.memberType);
-
+    async addMember(args: any) {
+      //call addMember smart contract function
+      let response = await args.contract.submitTransaction(args.function,
+          args.id, args.organization, args.address, args.memberType );
       return response;
+            
+
     }
 
 
