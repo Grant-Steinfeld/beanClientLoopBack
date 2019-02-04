@@ -97,14 +97,16 @@ export class RegulatorController {
     console.log('before blockchainClient.queryByKey')
     let result = await blockchainClient.queryByKey(dataForQuery);
     console.log(`lookup by key ${id}`);
-
-
-    //console.log(rez);
-    var rez = JSON.parse(result.toString());
-    console.log(rez)
-    let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
-    let retailer = new Regulator({ regulatorId: rez.id, organization: rez.organization, address: address });
-    return retailer;  
+    console.log('result after calling client.queryByKey: ')
+    console.log(result)
+    if (result.id) {
+      var rez = JSON.parse(result.toString());
+      console.log(rez)
+      let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
+      let regulator = new Regulator({ regulatorId: rez.id, organization: rez.organization, address: address });
+      return regulator;
+    } 
+    return result;
   }
 
   /**

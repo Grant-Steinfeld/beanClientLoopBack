@@ -86,7 +86,6 @@ export class GrowerController {
    */
   @operation('get', '/Grower/{id}')
   async growerFindById(@param({name: 'id', in: 'path'}) id: string, @param({name: 'filter', in: 'query'}) filter: string): Promise<Grower> {
- 
     let networkObj = await blockchainClient.connectToNetwork();
     let dataForQuery = {
       function: 'query',
@@ -98,14 +97,16 @@ export class GrowerController {
     console.log('before blockchainClient.queryByKey')
     let result = await blockchainClient.queryByKey(dataForQuery);
     console.log(`lookup by key ${id}`);
-
-
-    //console.log(rez);
-    var rez = JSON.parse(result.toString());
-    console.log(rez)
-    let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
-    let retailer = new Grower({ growerId: rez.id, organization: rez.organization, address: address });
-    return retailer;  
+    console.log('result after calling client.queryByKey: ')
+    console.log(result)
+    if (result.id) {
+      var rez = JSON.parse(result.toString());
+      console.log(rez)
+      let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
+      let grower = new Grower({ growerId: rez.id, organization: rez.organization, address: address });
+      return grower;
+    } 
+    return result;
   }
 
   /**

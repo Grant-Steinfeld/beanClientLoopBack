@@ -62,6 +62,7 @@ export module BlockChainModule {
 
     async addMember(args: any) {
       //call addMember smart contract function
+      //$TODO: dynamically call submitTransaction
       let response = await args.contract.submitTransaction(args.function,
           args.id, args.organization, args.address, args.memberType );
       return response;
@@ -71,6 +72,9 @@ export module BlockChainModule {
 
 
     async queryByKey(keyPassed: any) {
+
+      // let str = 'query'
+      // let response = await keyPassed.contract.submitTransaction('query', 'arg1', 'arg2');
 
       let response = await keyPassed.contract.submitTransaction('query', keyPassed.id);
       console.log('query by key response: ')
