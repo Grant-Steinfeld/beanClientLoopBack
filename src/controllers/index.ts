@@ -13,3 +13,4 @@ export * from './submit-fair-trade-data.controller';
 export * from './submit-packing-list.controller';
 export * from './submit-inbound-weight-tally.controller';
 export * from './submit-cupping.controller';
+export * from './foo.controller';
