@@ -1,5 +1,6 @@
-import { Request, RestBindings, get, operation, post, requestBody, ResponseObject, param } from '@loopback/rest';
+import { Request, RestBindings, get, operation, requestBody, ResponseObject, param, HttpErrors } from '@loopback/rest';
 import { inject } from '@loopback/context';
+import { ResponseMessage } from '../models/response-message.model';
 import { Shipper } from '../models/shipper.model';
 import { Address } from '../models/address.model';
 import { BlockChainModule } from '../blockchainClient';
@@ -26,8 +27,6 @@ export class ShipperController {
       },
     },
   })
-
-
   async shipperFind(@param({ name: 'id', in: 'path' }) id: string, @param({ name: 'filter', in: 'query' }) filter: string): Promise<Shipper> {
     let networkObj = await blockchainClient.connectToNetwork();
     let dataForQuery = {
@@ -48,7 +47,7 @@ export class ShipperController {
       let address = new Address({ city: rez.address, country: rez.address, street: rez.address });
       let shipper = new Shipper({ shipperId: rez.id, organization: rez.organization, address: address });
       return shipper;
-    } 
+    }
     return result;
 
   }
@@ -59,44 +58,37 @@ export class ShipperController {
   * @param requestBody Model instance data
   * @returns Request was successful
   */
-  // generated code uses @operation decorator
-  //@operation('post', '/Shipper')
-  @post('/Shipper', {
+
+  @operation('post', '/Shipper', {
     responses: {
       '200': {
-        description: 'Shipper model instance',
-        content: { 'application/json': { schema: { 'x-ts-type': Shipper } } },
+        description: 'ResponseMessage model instance',
+        content: { 'application/json': { schema: { 'x-ts-type': ResponseMessage } } },
       },
     },
   })
+  async shipperCreate(@requestBody() requestBody: Shipper): Promise<ResponseMessage> {
 
-  async shipperCreate(@requestBody() requestBody: Shipper): Promise<any> {
+    try {
+      let networkObj = await blockchainClient.connectToNetwork();
+      let dataForAddMember = {
+        function: 'addMember',
+        id: requestBody.shipperId,
+        organization: requestBody.organization,
+        address: `${requestBody.address.street} ${requestBody.address.city} ${requestBody.address.zip} ${requestBody.address.country}`,
+        memberType: 'shipper',
+        contract: networkObj.contract
+      };
 
-    //example of how to submit args to transaction - this can be changed
-    //  async addMember(ctx, id, organization, address, memberType) {
+      await blockchainClient.addMember(dataForAddMember);
 
-    console.log('shipper: ')
-    console.log(requestBody)
+      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'added Shipper to Blockchain' });
+      return responseMessage;
 
-    let networkObj = await blockchainClient.connectToNetwork();
-    console.log('newtork obj: ')
-    console.log(networkObj)
-    let dataForAddMember = {
-      function: 'addMember',
-      id: requestBody.shipperId,
-      organization: requestBody.organization,
-      address: `${requestBody.address.street} ${requestBody.address.city} ${requestBody.address.zip} ${requestBody.address.country}`,
-      memberType: 'shipper',
-      contract: networkObj.contract
-    };
-
-    var result = await blockchainClient.addMember(dataForAddMember);
-
-    console.log('result from blockchainClient.submitTransaction in controller: ')
-    console.log(result.toString())
-
-    //$to do: return blockchain hash or confirmation rather than the request
-    return result;
+    } catch (error) {
+      let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
+      return responseMessage;
+    }
   }
 
 
