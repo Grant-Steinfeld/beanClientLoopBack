@@ -1,4 +1,5 @@
-# beanclient 
+# beanclient
+beanClientLoopBack
 
 largely based of this tutorial:
 https://loopback.io/doc/en/lb4/todo-tutorial.html
