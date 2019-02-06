@@ -13,23 +13,11 @@ export class PourCup {
     }
   }
 
-  /**
-   * The class identifier for this type
-   */
-  @property({name: '$class'})
-  $class?: string = 'org.ibm.coffee.pourCup';
-
-  /**
-   * 
-   */
   @property({name: 'cupId', required: true})
   cupId: string;
 
-  /**
-   * 
-   */
-  @property({name: 'timeStamp'})
-  timeStamp?: string;
+  @property({name: 'batchId', required: true})
+  batchId: string;
 
   /**
    * The instance identifier for this type
@@ -40,8 +28,6 @@ export class PourCup {
   /**
    * 
    */
-  @property({name: 'timestamp'})
-  timestamp?: Date;
 
 }
 

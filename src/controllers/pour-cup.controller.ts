@@ -1,7 +1,9 @@
 /* tslint:disable:no-any */
 import {operation, param, requestBody} from '@loopback/rest';
 import {PourCup} from '../models/pour-cup.model';
+import { BlockChainModule } from '../blockchainClient';
 
+let blockchainClient = new BlockChainModule.BlockchainClient();
 /**
  * The controller class is generated from OpenAPI spec with operations tagged
  * by pourCup
@@ -19,7 +21,47 @@ export class PourCupController {
    */
   @operation('post', '/pourCup')
   async pourCupCreate(@requestBody() requestBody: PourCup): Promise<PourCup> {
-    throw new Error('Not implemented');
+    // @property({name: 'cupId', required: true})
+    // cupId: string;
+  
+    // /**
+    //  * The instance identifier for this type
+    //  */
+    // @property({name: 'transactionId'})
+    // transactionId?: string;
+  
+    // /**
+    //  * 
+    //  */
+    // @property({name: 'timestamp'})
+    // timestamp?: string;  
+
+    console.log('pourCup, requestBody: ')
+    console.log(requestBody)
+
+    let networkObj = await blockchainClient.connectToNetwork();
+    console.log('newtork obj: ')
+    console.log(networkObj)
+    let dateStr = new Date().toDateString();
+    // dateStr = dateStr.toDateString();
+    let dataForPourCup = {
+      function: 'pourCup',
+      cupId: requestBody.cupId,
+      batchId: requestBody.batchId,
+      transactionId: requestBody.transactionId,
+      contract: networkObj.contract
+    };
+
+    var result = await blockchainClient.pourCup(dataForPourCup);
+
+    console.log('result from blockchainClient.submitTransaction in controller: ')
+    console.log(result.toString())
+
+    
+
+    //$to do: return blockchain hash or confirmation rather than the request
+    return result;        
+
   }
 
   /**
