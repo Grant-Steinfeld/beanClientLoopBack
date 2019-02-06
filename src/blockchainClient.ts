@@ -100,6 +100,18 @@ export module BlockChainModule {
     return response;
 
     }
+
+    async submitCupping(args: any) {
+      console.log('args in the blockchain client')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.cupper, args.aroma, args.flavor, args.afterTaste,
+        args.acidity, args.body, args.finalScore, args.batchId,
+        args.transactionId, args.timestamp );
+    return response;
+
+    }
   }
 }
 

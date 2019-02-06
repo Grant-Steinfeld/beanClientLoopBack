@@ -13,67 +13,44 @@ export class SubmitCupping {
     }
   }
 
-  /**
-   * The class identifier for this type
-   */
-  @property({name: '$class'})
-  $class?: string = 'org.ibm.coffee.submitCupping';
-
-  /**
-   * The identifier of an instance of coffeeBatch
-   */
-  @property({name: 'coffeeBatch', required: true})
-  coffeeBatch: {
-  
-};
-
-  /**
-   * 
-   */
-  @property({name: 'date', required: true})
-  date: Date;
-
-  /**
-   * 
-   */
-  @property({name: 'cupper', required: true})
-  cupper: string;
+  @property({name: 'cupper'})
+  cupper?: string;
 
   /**
    * 
    */
   @property({name: 'aroma'})
-  aroma?: number;
+  aroma?: string;
 
   /**
    * 
    */
   @property({name: 'flavor'})
-  flavor?: number;
+  flavor?: string;
 
   /**
    * 
    */
   @property({name: 'afterTaste'})
-  afterTaste?: number;
+  afterTaste?: string;
 
   /**
    * 
    */
   @property({name: 'acidity'})
-  acidity?: number;
+  acidity?: string;
 
   /**
    * 
    */
   @property({name: 'body'})
-  body?: number;
+  body?: string;
 
   /**
    * 
    */
   @property({name: 'finalScore'})
-  finalScore?: number;
+  finalScore?: string;
 
   /**
    * 
@@ -91,7 +68,7 @@ export class SubmitCupping {
    * 
    */
   @property({name: 'timestamp'})
-  timestamp?: Date;
+  timestamp?: string;
 
 }
 
