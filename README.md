@@ -4,4 +4,6 @@ beanClientLoopBack
 
 
 Instructions on how to add a REST endpoint
-can be seen in LOOPBACK.md
+can be seen in
+
+[LOOPBACK.md](./docs/LOOPBACK.md)
