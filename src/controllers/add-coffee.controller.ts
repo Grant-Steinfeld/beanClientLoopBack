@@ -1,7 +1,9 @@
 /* tslint:disable:no-any */
 import {operation, param, requestBody} from '@loopback/rest';
 import {AddCoffee} from '../models/add-coffee.model';
+import { BlockChainModule } from '../blockchainClient';
 
+let blockchainClient = new BlockChainModule.BlockchainClient();
 /**
  * The controller class is generated from OpenAPI spec with operations tagged
  * by addCoffee
@@ -19,7 +21,33 @@ export class AddCoffeeController {
    */
   @operation('post', '/addCoffee')
   async addCoffeeCreate(@requestBody() requestBody: AddCoffee): Promise<AddCoffee> {
-    throw new Error('Not implemented');
+
+    console.log('addcoffee, requestBody: ')
+    console.log(requestBody)
+
+    let networkObj = await blockchainClient.connectToNetwork();
+    console.log('newtork obj: ')
+    console.log(networkObj)
+    let dateStr = new Date().toDateString();
+    // dateStr = dateStr.toDateString();
+    let dataForAddCoffee = {
+      function: 'addCoffee',
+      size: requestBody.size,
+      roast: requestBody.roast,
+      batchState: requestBody.batchState,
+      grower: requestBody.grower,
+      transactionId: requestBody.transactionId,
+      timestamp: dateStr,
+      contract: networkObj.contract
+    };
+
+    var result = await blockchainClient.addCoffee(dataForAddCoffee);
+
+    console.log('result from blockchainClient.submitTransaction in controller: ')
+    console.log(result.toString())
+
+    //$to do: return blockchain hash or confirmation rather than the request
+    return result;        
   }
 
   /**

@@ -88,5 +88,72 @@ export module BlockChainModule {
       return response;
 
     }
+
+    async submitFairTradeData(args: any) {
+      console.log('args in the blockchain client')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.reportName, args.orgDescription, args.reportYear, args.fairTradePremiumInvested,
+        args.investmentTitle1, args.investmentAmount1, args.investmentAmount2, args.investmentTitle2,
+        args.investmentAmount3, args.investmentTitle3, args.batchId, args.transactionId, args.timestamp  );
+    return response;
+
+    }
+
+    async submitCupping(args: any) {
+      console.log('args in the blockchain client')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.cupper, args.aroma, args.flavor, args.afterTaste,
+        args.acidity, args.body, args.finalScore, args.batchId,
+        args.transactionId, args.timestamp );
+    return response;
+
+    }
+
+    async submitPackingList(args: any) {
+      console.log('args in the blockchain client, packing list')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.grower, args.trader, args.PL_Invoice_no, args.PL_IssueDate,
+        args.PL_ICO_no, args.PL_ICO_Lot, args.PL_FDA_NO,
+        args.PL_Bill_of_Lading_No, args.PL_LoadedVessel, args.PL_VesselVoyage_No,
+        args.PL_Container_No, args.PL_Seal_no, args.PL_timestamp, args.batchId, 
+        args.transactionId, args.timestamp 
+      );
+
+      return response;
+
+    }
+
+    async submitWeightTally(args: any) {
+      console.log('args in the blockchain client,weight tally')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.dateStripped, args.marks, args.bagsExpected, args.condition,
+        args.insectActivity, args.batchId, args.transactionId, args.timestamp 
+      );
+
+      return response;
+
+    }
+
+    async addCoffee(args: any) {
+      console.log('args in the blockchain client,addcoffee')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.size, args.roast, args.batchState, args.grower,
+         args.transactionId, args.timestamp 
+      );
+
+      return response;
+
+    }
   }
 }
+

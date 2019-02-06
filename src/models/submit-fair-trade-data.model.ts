@@ -16,9 +16,6 @@ export class SubmitFairTradeData {
   /**
    * The class identifier for this type
    */
-  @property({name: '$class'})
-  $class?: string = 'org.ibm.coffee.submitFairTradeData';
-
   /**
    * 
    */
@@ -35,7 +32,7 @@ export class SubmitFairTradeData {
    * 
    */
   @property({name: 'reportYear'})
-  reportYear?: number;
+  reportYear?: string;
 
   /**
    * 
@@ -95,7 +92,7 @@ export class SubmitFairTradeData {
    * 
    */
   @property({name: 'timestamp'})
-  timestamp?: Date;
+  timestamp?: string;
 
 }
 

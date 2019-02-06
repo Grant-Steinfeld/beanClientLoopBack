@@ -14,40 +14,35 @@ export class AddCoffee {
   }
 
   /**
-   * The class identifier for this type
+   * 
    */
-  @property({name: '$class'})
-  $class?: string = 'org.ibm.coffee.addCoffee';
+  @property({name: 'size'})
+  size?:string;
 
   /**
    * 
    */
-  @property({name: 'size', required: true})
-  size: 'SMALL' | 'MEDIUM' | 'LARGE';
-
-  /**
-   * 
-   */
-  @property({name: 'roast', required: true})
-  roast: 'LIGHT' | 'MEDIUM' | 'DARK';
+  @property({name: 'roast'})
+  roast?: string;
 
   /**
    * 
    */
   @property({name: 'batchState', required: true})
-  batchState: 'READY_FOR_DISTRIBUTION' | 'ORGANIC_CERTIFICATION_APPROVED' | 'REGULATION_TEST_PASSED' | 'IMPORTED' | 'READY_FOR_SALE';
+  batchState?: string;
 
   /**
    * The identifier of an instance of grower
    */
-  @property({name: 'grower', required: true})
-  grower: {
-  
-};
+  @property({name: 'grower'})
+  grower?: string
 
   /**
    * The instance identifier for this type
    */
+  // @property({name: 'batchId', required: true})
+  // batchId?: string;
+
   @property({name: 'transactionId'})
   transactionId?: string;
 
@@ -55,7 +50,7 @@ export class AddCoffee {
    * 
    */
   @property({name: 'timestamp'})
-  timestamp?: Date;
+  timestamp?: string;
 
 }
 

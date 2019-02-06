@@ -12,40 +12,30 @@ export class SubmitPackingList {
       Object.assign(this, data);
     }
   }
-
-  /**
-   * The class identifier for this type
-   */
-  @property({name: '$class'})
-  $class?: string = 'org.ibm.coffee.submitPackingList';
-
   /**
    * The identifier of an instance of grower
    */
-  @property({name: 'grower', required: true})
-  grower: {
-  
-};
+  @property({name: 'grower'})
+  grower?: string;
 
   /**
    * The identifier of an instance of trader
    */
-  @property({name: 'trader', required: true})
-  trader: {
-  
-};
+  @property({name: 'trader'})
+  trader?: string;
+
 
   /**
    * 
    */
-  @property({name: 'PL_Invoice_no', required: true})
-  PL_Invoice_no: string;
+  @property({name: 'PL_Invoice_no'})
+  PL_Invoice_no?: string;
 
   /**
    * 
    */
   @property({name: 'PL_IssueDate'})
-  PL_IssueDate?: Date;
+  PL_IssueDate?: string;
 
   /**
    * 
@@ -117,7 +107,7 @@ export class SubmitPackingList {
    * 
    */
   @property({name: 'timestamp'})
-  timestamp?: Date;
+  timestamp?: string;
 
 }
 
