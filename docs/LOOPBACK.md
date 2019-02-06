@@ -8,6 +8,21 @@ In loopback the REST crud enpoints for example POST/GET/DELETE etc
 are in the controller and the type of data that is used by the controller is
 in the model.
 
+## Code Generation
+
+### using existing swagger
+
+What is swagger? Simply put it's the definition
+of your API in a language agnostic way, usally represented in JSON or YAML. OpenAPI is
+
+If you have an existing swagger.json url you can use the lb4 tool
+
+```sh
+lb4 openapi --url http://<<ipaddress/hostname>>/swagger.json --validate true
+```
+
+[details on using loopback OpenAPI code generation](./docs/SWAGGER-CODEGEN.md)
+
 ### using the lb4 command line tool
 we assume you are making a Foo Controller and a Foo Model ( with properties `id` and `descripton`)
 
@@ -101,9 +116,10 @@ type `lb4 controller`
 it will prompt you for the controller name
 which will be Foo
 
-` ? Controller class name: Foo`
+` ? Controller class nae: Foo`
 
-
+This will create a blank controller class, which you
+can wire up to your models ( hopefully this will change to generate all REST crud verbs in the future )
 
 
 
