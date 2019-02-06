@@ -164,6 +164,11 @@ export module BlockChainModule {
         args.cupId, args.batchId, args.transactionId
       );
 
+      if (response.length === 2) {
+        response = `batchId ${args.batchId} does not exist`;
+        return response;
+      }
+
       return response;
 
     }

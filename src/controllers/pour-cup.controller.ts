@@ -57,6 +57,8 @@ export class PourCupController {
     console.log('result from blockchainClient.submitTransaction in controller: ')
     console.log(result.toString())
 
+    
+
     //$to do: return blockchain hash or confirmation rather than the request
     return result;        
 
