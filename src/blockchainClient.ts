@@ -141,6 +141,19 @@ export module BlockChainModule {
       return response;
 
     }
+
+    async addCoffee(args: any) {
+      console.log('args in the blockchain client,addcoffee')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.size, args.roast, args.batchState, args.grower,
+         args.transactionId, args.timestamp 
+      );
+
+      return response;
+
+    }
   }
 }
 
