@@ -101,7 +101,20 @@ type `lb4 controller`
 it will prompt you for the controller name
 which will be Foo
 
-` ? Controller class name: Foo`
+` ? Controller class nae: Foo`
+
+
+## Using swagger to generate code
+If you have a REST API already, it's possible you have
+a swagger.json file.  If so it's relatively easy to download the file and generate your models and controllers.
+
+### download the swagger.json
+For example suppose I have a swagger test form.  In Firefox or Chrome, right mouse click on the screen and `inspect element` this sould bring up your browsers debug panel.  Simply go to the network tab, and reload your page.
+You should see an http/s call to swagger.json
+
+Copy that link to your clipboard.
+
+In
 
 
 
