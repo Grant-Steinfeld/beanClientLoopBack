@@ -8,6 +8,20 @@ In loopback the REST crud enpoints for example POST/GET/DELETE etc
 are in the controller and the type of data that is used by the controller is
 in the model.
 
+## Code Generation
+
+### using existing swagger
+
+what is swagger.json?
+
+if you have an existing url you can use the lb4 tool
+
+```sh
+lb4 openapi --url http://<<ipaddress/hostname>>/swagger.json --validate true
+```
+
+[more details](./docs/SWAGGER-CODEGEN.md)
+
 ### using the lb4 command line tool
 we assume you are making a Foo Controller and a Foo Model ( with properties `id` and `descripton`)
 
@@ -102,20 +116,6 @@ it will prompt you for the controller name
 which will be Foo
 
 ` ? Controller class nae: Foo`
-
-
-## Using swagger to generate code
-If you have a REST API already, it's possible you have
-a swagger.json file.  If so it's relatively easy to download the file and generate your models and controllers.
-
-### download the swagger.json
-For example suppose I have a swagger test form.  In Firefox or Chrome, right mouse click on the screen and `inspect element` this sould bring up your browsers debug panel.  Simply go to the network tab, and reload your page.
-You should see an http/s call to swagger.json
-
-Copy that link to your clipboard.
-
-In
-
 
 
 
