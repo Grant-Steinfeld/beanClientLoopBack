@@ -34,7 +34,8 @@ you will be able to see the endpoints and test your endpoints  ... they will all
 
 
 ## Troubleshooting and resources
- Make sure you have an existing loopback application setup first before generating code.
+ Make sure you have [an existing loopback application setup ](LOOPBACK-GETTING-STARTED.md)
+ first before generating code.
 
  Checkout the [loopback documentation about lb4 OpenAPI code generation](https://loopback.io/doc/en/lb4/OpenAPI-generator.html)
 
