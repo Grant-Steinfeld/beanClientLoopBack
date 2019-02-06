@@ -128,19 +128,19 @@ export module BlockChainModule {
       return response;
 
     }
+
+    async submitWeightTally(args: any) {
+      console.log('args in the blockchain client,weight tally')
+      console.log(args)
+
+      let response = await args.contract.submitTransaction(args.function,
+        args.dateStripped, args.marks, args.bagsExpected, args.condition,
+        args.insectActivity, args.batchId, args.transactionId, args.timestamp 
+      );
+
+      return response;
+
+    }
   }
 }
 
-// "reportName": "repName",
-// "organizationDescription": "descip",
-// "reportYear": "2002",
-// "fairtradePremiumInvested": "400$",
-// "investmentTitle1": "idk1",
-// "investmentAmount1": "100",
-// "investmentTitle2": "idk2",
-// "investmentAmount2": "200",
-// "investmentTitle3": "idk3",
-// "investmentAmount3": "300",
-// "batchId": "batch3",
-// "transactionId": "transId",
-// "timestamp": "now"

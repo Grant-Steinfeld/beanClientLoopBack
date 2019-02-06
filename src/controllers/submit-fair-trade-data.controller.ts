@@ -1,7 +1,6 @@
 /* tslint:disable:no-any */
 import {operation, param, requestBody} from '@loopback/rest';
 import {SubmitFairTradeData} from '../models/submit-fair-trade-data.model';
-import { Address } from '../models/address.model';
 import { BlockChainModule } from '../blockchainClient';
 
 let blockchainClient = new BlockChainModule.BlockchainClient();

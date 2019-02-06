@@ -1,6 +1,5 @@
 /* tslint:disable:no-any */
 import {model, property} from '@loopback/repository';
-import {Condition} from './condition.model';
 
 /**
  * The model class is generated from OpenAPI schema - submitInboundWeightTally
@@ -15,24 +14,10 @@ export class SubmitInboundWeightTally {
   }
 
   /**
-   * The class identifier for this type
-   */
-  @property({name: '$class'})
-  $class?: string = 'org.ibm.coffee.submitInboundWeightTally';
-
-  /**
-   * The identifier of an instance of coffeeBatch
-   */
-  @property({name: 'coffeeBatch', required: true})
-  coffeeBatch: {
-  
-};
-
-  /**
    * 
    */
   @property({name: 'dateStripped'})
-  dateStripped?: Date;
+  dateStripped?: string;
 
   /**
    * 
@@ -44,19 +29,19 @@ export class SubmitInboundWeightTally {
    * 
    */
   @property({name: 'bagsExpected'})
-  bagsExpected?: number;
+  bagsExpected?: string;
 
   /**
    * A concept named Condition
    */
-  @property({name: 'condition', required: true})
-  condition: Condition;
+  @property({name: 'condition'})
+  condition?: string;
 
   /**
    * 
    */
-  @property({name: 'insectActivity', required: true})
-  insectActivity: boolean;
+  @property({name: 'insectActivity'})
+  insectActivity?: string;
 
   /**
    * 
@@ -74,7 +59,7 @@ export class SubmitInboundWeightTally {
    * 
    */
   @property({name: 'timestamp'})
-  timestamp?: Date;
+  timestamp?: string;
 
 }
 
