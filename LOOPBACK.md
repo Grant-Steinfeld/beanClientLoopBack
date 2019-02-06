@@ -12,15 +12,16 @@ in the model.
 
 ### using existing swagger
 
-what is swagger.json?
+What is swagger? Simply put it's the definition
+of your API in a language agnostic way, usally represented in JSON or YAML. OpenAPI is
 
-if you have an existing url you can use the lb4 tool
+If you have an existing swagger.json url you can use the lb4 tool
 
 ```sh
 lb4 openapi --url http://<<ipaddress/hostname>>/swagger.json --validate true
 ```
 
-[more details](./docs/SWAGGER-CODEGEN.md)
+[details on using loopback OpenAPI code generation](./docs/SWAGGER-CODEGEN.md)
 
 ### using the lb4 command line tool
 we assume you are making a Foo Controller and a Foo Model ( with properties `id` and `descripton`)
@@ -117,6 +118,8 @@ which will be Foo
 
 ` ? Controller class nae: Foo`
 
+This will create a blank controller class, which you
+can wire up to your models ( hopefully this will change to generate all REST crud verbs in the future )
 
 
 
