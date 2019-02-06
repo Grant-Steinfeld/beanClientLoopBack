@@ -12,6 +12,8 @@ You should see an http/s call to swagger.json
 Copy the swagger.json link to your clipboard.
 
 ### use loopback command line tooling to generate code
+Make sure you have [an existing loopback application setup ](LOOPBACK-GETTING-STARTED.md)
+first before generating code.
 
 using the swagger.json URL generate code by using the following command in a terminal
 
@@ -34,8 +36,7 @@ you will be able to see the endpoints and test your endpoints  ... they will all
 
 
 ## Troubleshooting and resources
- Make sure you have [an existing loopback application setup ](LOOPBACK-GETTING-STARTED.md)
- first before generating code.
+
 
  Checkout the [loopback documentation about lb4 OpenAPI code generation](https://loopback.io/doc/en/lb4/OpenAPI-generator.html)
 
