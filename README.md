@@ -1,7 +1,5 @@
 # Create a fair trade supply network with Hyperledger Composer and IBM Blockchain Starter Plan
 
-⚠️
-
 This code pattern is based on a recent proof-of-concept developed in collaboration with
 a coffee roasting company that was nice enough to let us use their supply-chain documents.
 The link to the application that the code pattern is based off of is here: https://www.ibm.com/thought-leadership/blockchainbean/
@@ -13,8 +11,10 @@ In this Code Pattern we will create a blockchain app that increases visibility a
 
 When the reader has completed this Code Pattern, they will understand how to:
 
+
+* Package and deploy the smart contract to a local instance of Hyperledger Fabric using IBM Blockchain Platform Extension for VS Code
+* Develop a Node.js blockchain loopback enabled REST endpoints to interact with the deployed Fabric network
 * Interact with IBM Blockchain Starter Plan
-* Build a blockchain back-end using Hyperledger Composer
 * Create and use Cloudant NoSQL Database
 * Deploy a Cloud Foundry application that writes and queries to the ledger
 
@@ -28,26 +28,32 @@ When the reader has completed this Code Pattern, they will understand how to:
 4. The peers sign the transaction with their certificates which are held in Cloudant. The ledger is updated on the peers.
 
 ## Included components
+
+
+* [IBM Blockchain Platform Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=IBMBlockchain.ibm-blockchain-platform) is designed to assist users in developing, testing, and deploying smart contracts -- including connecting to Hyperledger Fabric environments.
+* [Hyperledger Fabric v1.4](https://hyperledger-fabric.readthedocs.io) is a platform for distributed ledger solutions, underpinned by a modular architecture that delivers high degrees of confidentiality, resiliency, flexibility, and scalability.
+* [Visual Studio Code](https://code.visualstudio.com/download) is a code editor that's redefined and optimized for building and debugging modern web and cloud applications.
 * [IBM Blockchain Starter Plan](https://console.bluemix.net/catalog/services/blockchain): Use the IBM Blockchain Platform to simplify the developmental, governmental, and operational aspects of creating a blockchain solution.
 * [Cloudant NoSQL DB](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
 
 ## Featured technologies
++ [Node.js](https://nodejs.org/en/) is an open source, cross-platform JavaScript run-time environment that executes server-side JavaScript code.
++ [Loopback 4](https://loopback.io/) is a NodeJS REST API framework.
+
 * [IBM Blockchain](https://www.ibm.com/blockchain): Blockchain is a shared, immutable ledger for recording the history of transactions.
 * [Databases](https://en.wikipedia.org/wiki/IBM_Information_Management_System#.22Full_Function.22_databases): Repository for storing and managing collections of data.
 * [Cloud](https://www.ibm.com/developerworks/learn/cloud/): Accessing computer and information technology resources through the Internet.
 
-# Watch the Video
+## Prerequisites
+You will need to follow the requirements for the [IBM Blockchain Platform Extension for VS Code](https://github.com/IBM-Blockchain/blockchain-vscode-extension/blob/master/README.md#requirements):
 
-# Prerequisites
-1. If you do not have an IBM Cloud account yet, you will need to create one [here](https://ibm.biz/BdjLxy).
+- [VSCode version 1.26 or greater](https://code.visualstudio.com)
+- [Node v8.x or greater and npm v5.x or greater](https://nodejs.org/en/download/)
+- [Yeoman (yo) v2.x](http://yeoman.io/)
+- [Docker version v17.06.2-ce or greater](https://www.docker.com/get-docker)
+- [Docker Compose v1.14.0 or greater](https://docs.docker.com/compose/install/)
 
-2. [Visual Studio Code](https://code.visualstudio.com/) (VS Code)
-
-3. IBM Blockchain Platform VS Code Extension
-
-4. NodeJS v8.12.x
-
-5. Loopback v4 to generate app skeleton.
+- Loopback v4 to generate app skeleton.
 
 ```
 $ npm install -g @loopback/cli
@@ -93,7 +99,7 @@ $ npm install -g @loopback/cli
 Open Visual Studio code
 
 ## Step 1. Install IBM Blockchain VS Code Extension
-Assuming you successfuly installed VS Code.  Install the IBM Blockchain Platform Visual Studio Code extension.
+Assuming you have installed VS Code.  Add the IBM Blockchain Platform Visual Studio Code extension.
 
 ## Step 2. Clone the Smart Contract repo
 Clone this repository and open it in VS Code
@@ -132,8 +138,7 @@ You will need to open the IBM Blockchain Platform Extension panel
 Then choose `Export Connection Details`
 Save the wallet in the root folder of loopback project.
 
-In the explorer panel, you should now see a new directory `local_fabric` this is where the wallet for
-certificates for the Admin@org1.example.com will reside.
+In the explorer panel(1), you should now see a new directory `local_fabric`(2) this is where the wallet for certificates for the Admin@org1.example.com will reside.
 
 ![ExportConnectionFiles](./docs/resources/EXPORT-CONNECTION-2-WALLET.gif)
 
@@ -565,14 +570,9 @@ to submit data to the blockchain. Hope this was helpful, and as always, I am ope
 
 Thank you for reading, I hope you enjoyed it. Go build something awesome! 🙌🏼
 
-<!-- ## Deploy to IBM Cloud -->
 
-
-<!-- [![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/watson-second-opinion) -->
 # Links
-
 * [IBM Blockchain - Marbles demo](https://github.com/IBM-Blockchain/marbles)
-* [Hyperledger Composer](https://hyperledger.github.io/composer/latest/index.html)
 
 
 # Learn more
