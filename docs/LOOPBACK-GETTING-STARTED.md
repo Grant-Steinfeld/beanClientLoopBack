@@ -2,6 +2,10 @@
 ## Getting started
 make sure you have nodeJS installed
 
+
+## VScode - getting it
+creating a empty project
+
 ## install loopback via npm
 ```sh
 npm i -g @loopback/cli
