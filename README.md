@@ -1,7 +1,6 @@
 # Create a fair trade supply network with Hyperledger Composer and IBM Blockchain Starter Plan
 
-****⚠️⚠️⚠️THIS PATTERN IS UNDER CONSTRUCTION TO SHIFT FROM COMPOSER TO HYPERLEDGER FABRIC⚠️⚠️⚠️****
-****⚠️⚠️⚠️THE STEPS OUTLINED BELOW WILL NOT WORK. UPDATE IS IN PROGRESS - HOREA⚠️⚠️⚠️****
+⚠️
 
 This code pattern is based on a recent proof-of-concept developed in collaboration with
 a coffee roasting company that was nice enough to let us use their supply-chain documents.
@@ -37,42 +36,133 @@ When the reader has completed this Code Pattern, they will understand how to:
 * [Databases](https://en.wikipedia.org/wiki/IBM_Information_Management_System#.22Full_Function.22_databases): Repository for storing and managing collections of data.
 * [Cloud](https://www.ibm.com/developerworks/learn/cloud/): Accessing computer and information technology resources through the Internet.
 
-# Watch the Video - Deploy a Hyperledger Composer blockchain network to cloud - Setup (Part 1)
+# Watch the Video
 
-[![](docs/part1.png)](https://www.youtube.com/watch?v=fzNF-5pdxdk&t=5s)
-
-# Watch the Video - Deploy a Hyperledger Composer blockchain network to cloud - Setup (Part 2)
-
-[![](docs/part2.png)](https://www.youtube.com/watch?v=dT6YfeMvIzw&t=4s)
 # Prerequisites
 1. If you do not have an IBM Cloud account yet, you will need to create one [here](https://ibm.biz/BdjLxy).
 
-2. Yeoman, to generate app skeleton.
+2. [Visual Studio Code](https://code.visualstudio.com/) (VS Code)
+
+3. IBM Blockchain Platform VS Code Extension
+
+4. NodeJS v8.12.x
+
+5. Loopback v4 to generate app skeleton.
+
 ```
-$ npm install -g generator-hyperledger-composer
-$ npm install -g yo
+$ npm install -g @loopback/cli
 ```
 
 # Steps
+## Development on your local environment
+1. [Install IBM Blockchain VS Code Extension](#step-1-Install-IBM-Blockchain-VS-Code-Extension)
 
-1. [Create the toolchain](#step-1-create-the-toolchain)
-2. [Clone the repo](#step-2-clone-the-repo)
-3. [Use Yeoman to scaffold your project](#step-3-use-yeoman-to-scaffold-your-project)
-4. [Push smart contract code](#step-4-push-smart-contract-code)
-5. [Deploy smart contract to IBM Blockchain Starter Plan](#step-5-deploy-smart-contract-to-ibm-blockchain-starter-plan)
-6. [Post transactions and query the Composer REST Server (Swagger UI)](#step-6-post-transactions-and-query-the-composer-rest-server-swagger-ui)
-7. [Launch IBM Blockchain Starter Plan](#step-7-launch-ibm-blockchain-starter-plan)
+2. [Clone the Smart Contract repo](#step-2-clone-the-smartcontract-repo)
+
+3. [Package, Install and run the Smart Contract code](#step-3-package-install-run-smart-contract)
+
+4. [Clone the BlockBean Client repo](#step-4-clone-the-BlockBean-Client-repo)
+
+5. [Export your wallet to BlockBean Client](#step-5-Export-your-wallet-to-BlockBean-Client)
+
+6. [Adding a new API endpoint to the BlockBean Client](#step-6-Adding-a-new-API-endpoint-to-the-BlockBean-Client)
+
+7. [Wire up Loopback to Blockchain](#step-7-use-Loopback-to-connect-to-blockchain)
+
+8. [Use Swagger Explorer to call REST API](#step-8-use-Swagger-to-call-REST-API)
+
+
+## Remote deployment to IBM Cloud
+
+1. [Package and run smart contract code](#step-4-push-smart-contract-code)
+
+2. [Deploy smart contract to IBM Blockchain Starter Plan](#step-5-deploy-smart-contract-to-ibm-blockchain-starter-plan)
+
+6. [Post transactions and query the Loopback REST Server (Swagger UI)](#step-6-post-transactions-and-query-the-composer-rest-server-swagger-ui)
+
+3. [Launch IBM Blockchain Starter Plan](#step-7-launch-ibm-blockchain-starter-plan)
+
 8. [Inspect blocks on IBM Blockchain Starter Plan](#step-8-inspect-blocks-on-ibm-blockchain-starter-plan)
+
 9. [Submit fair trade supply data](#step-9-submit-fair-trade-supply-data)
 
 
-<!-- In this code pattern, we will use the blockchain-starter-kit repository: https://github.com/sstone1/blockchain-starter-kit to
-deploy our smart contract to the cloud. This repo will help us create a DevOps toolchain to automate deployment. -->
+<!-- the steps details -->
 
-<!-- <img src="https://i.makeagif.com/media/7-24-2018/MATtPg.gif" width="720" height="450" /> -->
+# Development on your local environment
+Open Visual Studio code
+
+## Step 1. Install IBM Blockchain VS Code Extension
+Assuming you successfuly installed VS Code.  Install the IBM Blockchain Platform Visual Studio Code extension.
+
+## Step 2. Clone the Smart Contract repo
+Clone this repository and open it in VS Code
+```sh
+$ git clone git@github.com:horeaporutiu/blockchainbean2.git
+$ code .
+```
+
+## Step 3. Package, Install and run the Smart Contract code
+Package mycontract.js ...
+
+Install ...
+
+Run / Test ...
+
+## Step 4. Clone the BlockBean Client repo
+Clone BlockBean Client repository
+
+```sh
+$ git clone git@github.com:Grant-Steinfeld/beanClientLoopBack.git
+```
+
+Add this folder to you Visual Studio Workspace
+```sh
+$ code .
+```
+
+## Step 5. Export your wallet to BlockBean Client
+You will need to open the IBM Blockchain Platform Extension panel
+
+![BlockChainExtImage](./docs/resources/VS-CODE-LOCAL-FABRIC-EXPORT-CONNECTION-1.gif)
+
+1. Click on the Blockchain Extension Icon
+
+2. Right mouse click on the local_fabric Icon
+Then choose `Export Connection Details`
+Save the wallet in the root folder of loopback project.
+
+In the explorer panel, you should now see a new directory `local_fabric` this is where the wallet for
+certificates for the Admin@org1.example.com will reside.
+
+![ExportConnectionFiles](./docs/resources/EXPORT-CONNECTION-2-WALLET.gif)
+
+network.yaml - edit  ...
 
 
-<!-- ![fd](https://i.makeagif.com/media/7-24-2018/MATtPg.gif) -->
+## Step 6. Adding a new API endpoint to the BlockBean Client
+Explain Loopback code generation Model (lb4 model) and Cotroller (lb4 controller) commands
+
+Controller add methods for GET and POST
+
+
+## Step 7. Wire up Loopback to Blockchain
+how to wire up to blockchainClient.ts
+
+## Step 8. Use Swagger Explorer to call REST API
+
+```sh
+npm start
+```
+
+In your browser go to local
+[swagger REST explorer  ](http://127.0.0.1:3000/explorer/#/)
+
+By now you have completed the local development and testing of the BlockBean network and client, great, good job.
+
+Now lets look at how to deploy this to the cloud.
+
+# Remote
 
 ## Step 1. Create the toolchain
 
@@ -85,8 +175,6 @@ Follow steps in the in the README to create your DevOps toolchain, and GitHub re
 
 ## Step 2. Clone the repo
 
- ![packageFile](/docs/gitClone.gif)
-
 
 Now we need to clone the repo we have just created. Click on the Github button in the middle, which will take you to your new GitHub repo. Now, click on the green `clone or download` button on the right side of the page. This should give you a URL. Save this, you'll need it in the next step. Now in your terminal, find a place where you would like to start your project. In terminal, execute the following
 ```git clone https://github.com/<yourUsername/projectname>.git```
@@ -97,9 +185,9 @@ Go into your newly cloned repo. I called my bsk-horea-2.
 $ cd bsk-horea-2
 ```
 
-## Step 3. Use Yeoman to scaffold your project
+## Step 3. Use Loopback to scaffold your project
 
- ![packageFile](/docs/yeoman.gif)
+ ![packageFile](/docs/resources/loopback.gif)
 
 Now to the fun part, the smart contracts. Let's use Yeoman.
 
